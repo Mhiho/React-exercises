@@ -15,7 +15,7 @@ class PersonTwo extends Component {
   componentDidMount() {
     console.log('[Person.js] Inside componentDidMount()');
     if(this.props.position === 1) {
-    this.inputElement.focus();
+    this.inputElement.focus(); 
   }
 }
   render() {
