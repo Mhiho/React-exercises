@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
-import './Person.css';
+import classes from './Person.css';
+import WithClass from '../../../hoc/WithClass';
 
+class PersonTwo extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[Person.js] Inside Constructor',props);
 
-const PersonTwo = (props) => {
-  const style = {
-    '@media (min-width: 500px)': {
-      width: '450px',
-      border: '1px solid #eee'
-    }
   }
-return (
-  <div className="Person"
-        style={style}>
-  <p onClick={props.clicked}>
-  Nazywam się {props.name}, mam {props.age} lat i {props.haircolor} włosy.
-  </p>
-  <p>{props.children}</p>
-  <input type="text"
-        onChange={props.changed}
-        value={props.value}
-        />
-  </div>
-)
+
+  componentWillMount() {
+    console.log('[Person.js] Inside componentWillMount()');
+  }
+  componentDidMount() {
+    console.log('[Person.js] Inside componentDidMount()');
+    if(this.props.position === 1) {
+    this.inputElement.focus();
+  }
+}
+  render() {
+    console.log('[Person.js] Inside Render()');
+
+    return (
+      <WithClass classes={classes.Person}
+          >
+          <p onClick={this.props.clicked}>
+            Nazywam się {this.props.name}, mam {this.props.age} lat i {this.props.haircolor} włosy.
+          </p>
+          <p>{this.props.children}</p>
+          <input
+              ref={(inp) => { this.inputElement = inp }}
+              type="text"
+              onChange={this.props.changed}
+              value={this.props.value}
+          />
+    </WithClass>
+  )
+  }
 }
 
-export default Radium(PersonTwo);
+
+export default PersonTwo;
